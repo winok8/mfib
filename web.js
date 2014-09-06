@@ -1,24 +1,27 @@
 /**
- *
+ * 实现路由和模块的分离
  */
 var http = require('http');
 var mq = require('mq');
-var rpc = require('rpc');
+var fs = require('fs');
 
 var routing = new mq.Routing({});
 routing.append('^/assert(/.*)$', http.fileHandler('assert/'));
 
-var contr = require('controllers/user.js');
-var name;
-for (name in contr.actions) {
-	routing.append('^/user'+name, contr.actions[name]);
+/**
+ * 从controllers文件夹读取模块，并自动注入到routing中
+ */
+var flist = fs.readdir('controllers');
+var regex = /([^\.]+)\.js/;
+for (var i = 0; i < flist.length; i++) {
+
+	var matchs = regex.exec(flist[i].name);
+	if (flist[i].isFile && matchs) {
+		var contr = require('controllers/' + matchs[1] + '.js');
+		for (var name in contr.actions) {
+			routing.append('^/'+matchs[1]+'/'+name, contr.actions[name]);
+		}
+	}
 }
 
-//read controller
 module.exports = new http.Handler(routing);
-/*new mq.Routing({
-
-	'^/assert(/.*)$': http.fileHandler('assert/'),
-	'^/([^/]*)/(.*)$': require('controllers/')
-}));
-*/

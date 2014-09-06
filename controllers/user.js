@@ -1,4 +1,6 @@
-
+/**
+ * todo: 需要考虑增加http util, 继承, ['get','post','delete'] 机制
+ */
 module.exports = (function() {
 
   var actions = {};
@@ -15,21 +17,18 @@ module.exports = (function() {
     actions.push();
   };
 
-  add('/getall', ['get','post'], function() {
+  add('getall', ['get','post'], function() {
 
   });
   */
 
-  actions['/getall'] = function() {
+  actions['getall'] = function(v) {
 
-      console.log('getall');
-      return true;
+      return v.response.write('getall');
   };
 
-  actions['/get/(.*)'] = function() {
-      console.log('get/1')
-
-      return true;
+  actions['get/(.*)'] = function(v) {
+      return v.response.write('get');
   };
 
 	return {

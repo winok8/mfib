@@ -1,10 +1,7 @@
 /**
- *
+ * todo: 增加不断线平滑升级机制
  */
 var net = require('net');
-var http = require('http');
-var mq = require('mq');
-var rpc = require('rpc');
 
 var hdlr = require('web.js');
 hdlr.crossDomain = true;

@@ -1,9 +1,8 @@
 
 ##目标
 
-为fibjs实现一个非常简单的web/api 框架: 
+为fibjs实现一个非常简单的web/api 框架:
 + 路由、模块分离
 + 不断线平滑升级
-+ session机制
 + http util: 参数,重定向
 + 总代码不超过250行
