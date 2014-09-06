@@ -3,36 +3,36 @@
  */
 module.exports = (function() {
 
-  var actions = {};
+    var actions = {};
 
-  /*
-  var actions = new Array();
+    /*
+     var actions = new Array();
+     
+     function add(name, type, func) {
+     var d = {
+     'name': name,
+     'type': type
+     };
+     
+     actions.push();
+     };
+     
+     add('getall', ['get','post'], function() {
+     
+     });
+     */
+    
+    actions['getall'] = function(v) {
 
-  function add(name, type, func) {
-    var d = {
-      'name': name,
-      'type': type
+        return v.response.write('getall');
     };
 
-    actions.push();
-  };
+    actions['get/(.*)'] = function(v) {
+        return v.response.write('get');
+    };
 
-  add('getall', ['get','post'], function() {
-
-  });
-  */
-
-  actions['getall'] = function(v) {
-
-      return v.response.write('getall');
-  };
-
-  actions['get/(.*)'] = function(v) {
-      return v.response.write('get');
-  };
-
-	return {
-    actions : actions
-  };
+    return {
+        actions: actions
+    };
 
 })();
